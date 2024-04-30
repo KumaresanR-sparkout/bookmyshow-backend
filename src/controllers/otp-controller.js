@@ -12,7 +12,7 @@ export const otpGenerator = async (req, res) => {
             res.status(201).send(sendSuccessResponse(201, "otp sent provided email successfully", newUser))
         }
         else {
-            res.status(400).send(sendErrorResponse(400, "email has been registered"))
+            res.status(400).send(sendErrorResponse(400, "email has not been registered"))
         }
     }
     catch (error) {

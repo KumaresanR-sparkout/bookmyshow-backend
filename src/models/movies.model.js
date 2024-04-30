@@ -1,31 +1,22 @@
 import mongoose from "mongoose";
 
 const movies = new mongoose.Schema({
+    screenId: {
+        type: Number,
+        unique: true,
+        required: true
+    },
+    movieId: {
+        type: Number,
+        unique: true,
+        required: true
+    },
     movieName: {
         type: String,
         required: true
     },
-    reviews: {
-        ratings: {
-            type: Number,
-            default: null
-        },
-        votes: {
-            type: Number,
-            default: null
-        },
-        likes: {
-            type: Number,
-            default: null
-        },
-
-    },
-    screen: {
-        type: String,
-        required: true
-    },
     language: {
-        type: String,
+        type: [String],
         required: true
     },
     time: {

@@ -4,6 +4,7 @@ import movieRouter from '../src/routes/movie-route'
 import signupRouter from './routes/signup-route'
 import loginRouter from '../src/routes/login-route'
 import otpRouter from '../src/routes/otp-route'
+import MovieScreen from '../src/models/screen.model'
 
 require('dotenv').config()
 const app = express()
@@ -17,6 +18,8 @@ app.use('/otp',otpRouter)
 mongoose.connect(process.env.MONGO).then((connect) => {
     console.log("MongoDb connected Successfully")
 }).catch((error) => console.log(error.message))
+
+
 
 app.listen(process.env.PORT, () => {
     console.log(`server started at port ${process.env.PORT}`)

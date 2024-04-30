@@ -11,7 +11,7 @@ export const adminLoginAccount = async (req, res) => {
             if (existingUser.role == "admin") {
                 if (existingUser.email == req.body.email && existingUser.password == req.body.password) {
 
-                    const jwt = jsonwebtoken.sign({ data: { email: existingUser.email, role: "visitor" } }, process.env.KEY, { expiresIn: '1h' })
+                    const jwt = jsonwebtoken.sign({ data: { email: existingUser.email, role: "admin" } }, process.env.KEY, { expiresIn: '1h' })
                     const sendResponse = { existingUser, "token": jwt }
 
                     res.status(200).send(sendSuccessResponse(200, "user loggedIn successfully", sendResponse))
