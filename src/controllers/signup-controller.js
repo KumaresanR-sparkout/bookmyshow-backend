@@ -1,6 +1,6 @@
 import UserAccount from '../models/user.model'
-import { sendSuccessResponse } from '../utils/successResponse'
-import { sendErrorResponse } from '../utils/errorResponse'
+import { sendSuccessResponse, sendErrorResponse } from '../utils/commonResponse-utils'
+
 
 export const signupAccount = async (req, res) => {
     try {
@@ -8,14 +8,14 @@ export const signupAccount = async (req, res) => {
         if (!existingUser) {
             const userData = { email: req.body.email, password: req.body.password, role: req.role }
             const signupUser = await new UserAccount(userData).save()
-            res.status(201).send(sendSuccessResponse(201, "user signedUp successfully", signupUser))
+            sendSuccessResponse(res, 201, "user signedUp successfully", signupUser)
         }
         else {
-            res.status(400).send(sendErrorResponse(400, "already email has been registered"))
+            sendErrorResponse(res, 400, "already email has been registered")
         }
 
     }
     catch (error) {
-        res.status(500).send(sendErrorResponse(500, "account not created! something went wrong"))
+        sendErrorResponse(res, 500, "account not created! something went wrong")
     }
 }

@@ -1,6 +1,5 @@
 import Movies from '../models/movies.model'
-import { sendSuccessResponse } from '../utils/successResponse'
-import { sendErrorResponse } from '../utils/errorResponse'
+import { sendSuccessResponse, sendErrorResponse } from '../utils/commonResponse-utils'
 
 export const getMovieLists = async (req, res) => {
     try {
@@ -14,9 +13,9 @@ export const getMovieLists = async (req, res) => {
                 }
             }
         ])
-        res.status(200).send(sendSuccessResponse(200, "listing all movies in cinemas", movieLists))
+        sendSuccessResponse(res, 200, "listing all movies in cinemas", movieLists)
     }
     catch (error) {
-        res.status(500).send(sendErrorResponse(500, error.message))
+        sendErrorResponse(res, 500, error.message)
     }
 }

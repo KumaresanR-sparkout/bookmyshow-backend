@@ -1,6 +1,6 @@
 import MovieScreen from '../models/screen.model'
-import { sendSuccessResponse } from '../utils/successResponse'
-import { sendErrorResponse } from '../utils/errorResponse'
+import { sendSuccessResponse, sendErrorResponse } from '../utils/commonResponse-utils'
+
 
 export const getAllLocations = async (req, res) => {
     try {
@@ -11,9 +11,9 @@ export const getAllLocations = async (req, res) => {
             }
             return acc
         }, [])
-        res.status(200).send(sendSuccessResponse(200, "listing available all location", filteredData))
+        sendSuccessResponse(res, 200, "listing available all location", filteredData)
     }
     catch (error) {
-        res.status(500).send(sendErrorResponse(500, error.message))
+        sendErrorResponse(res, 500, error.message)
     }
 }

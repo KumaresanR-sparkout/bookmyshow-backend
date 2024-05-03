@@ -1,7 +1,7 @@
 import Movies from '../models/movies.model'
 import MovieScreen from '../models/screen.model'
-import { sendSuccessResponse } from '../utils/successResponse'
-import { sendErrorResponse } from '../utils/errorResponse'
+import { sendSuccessResponse,sendErrorResponse } from '../utils/commonResponse-utils'
+
 export const saveMovieList = async (req, res) => {
     try {
         console.log(Object.keys(req.body).length)
@@ -22,18 +22,18 @@ export const saveMovieList = async (req, res) => {
                 const movieScreen = await new MovieScreen(screen).save()
                 const movieList = await new Movies(movies).save()
 
-                res.status(201).send(sendSuccessResponse(201, "Movies lists created successfully", { movieScreen, movieList }))
+                sendSuccessResponse(res,201, "Movies lists created successfully", { movieScreen, movieList })
 
             }
             catch (error) {
-                res.status(500).send(sendErrorResponse(500, error.mesage))
+                sendErrorResponse(res,500, error.message)
             }
         }
         else {
-            res.status(404).send(sendErrorResponse(404, "no movies found to create"))
+            sendErrorResponse(res,404, "no movies found to create")
         }
     }
     catch (error) {
-        res.status(500).send(sendErrorResponse(500, error.mesage))
+        sendErrorResponse(res,500, error.message)
     }
 }

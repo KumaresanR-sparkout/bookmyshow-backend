@@ -1,6 +1,5 @@
 import UserAccount from '../models/user.model'
-import { sendSuccessResponse } from '../utils/successResponse'
-import { sendErrorResponse } from '../utils/errorResponse'
+import { sendSuccessResponse, sendErrorResponse } from '../utils/commonResponse-utils'
 import jsonwebtoken from 'jsonwebtoken'
 require('dotenv').config()
 
@@ -14,21 +13,21 @@ export const visitorLoginAccount = async (req, res) => {
                     const jwt = jsonwebtoken.sign({ data: { email: existingUser.email, role: "visitor" } }, process.env.KEY, { expiresIn: '1h' })
                     const sendResponse = { existingUser, "token": jwt }
 
-                    res.status(200).send(sendSuccessResponse(200, "user loggedIn successfully", sendResponse))
+                    sendSuccessResponse(res, 200, "user loggedIn successfully", sendResponse)
                 }
                 else {
-                    res.status(400).send(sendErrorResponse(400, "use valid login credentials"))
+                    sendErrorResponse(res, 400, "use valid login credentials")
                 }
             }
             else {
-                res.status(400).send(sendErrorResponse(400, "you are not able to access visitor route"))
+                sendErrorResponse(res, 400, "you are not able to access visitor route")
             }
         }
         else {
-            res.status(400).send(sendErrorResponse(400, "No user found, please signup and login"))
+            sendErrorResponse(res, 400, "No user found, please signup and login")
         }
     }
     catch (error) {
-        res.status(500).send(sendErrorResponse(500, error.message))
+        sendErrorResponse(res, 500, error.message)
     }
 }

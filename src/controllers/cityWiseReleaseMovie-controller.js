@@ -5,8 +5,6 @@ import MovieScreen from '../models/screen.model'
 export const cityWiseAllReleaseMovie = async (req, res) => {
     try {
 
-        const listCity = req.params.id
-        console.log(listCity)
         const movieList = await MovieScreen.aggregate([
             {
                 $match: { city: req.params.city }

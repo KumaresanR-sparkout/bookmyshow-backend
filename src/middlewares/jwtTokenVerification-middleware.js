@@ -1,5 +1,5 @@
 import jsonwentoken from 'jsonwebtoken'
-import { sendErrorResponse } from '../utils/errorResponse'
+import { sendErrorResponse } from '../utils/commonResponse-utils'
 require('dotenv').config()
 
 export const verifyToken = (req, res, next) => {
@@ -8,23 +8,23 @@ export const verifyToken = (req, res, next) => {
         if (token) {
             const verifyToken = jsonwentoken.verify(token, process.env.KEY, (error, response) => {
                 if (error) {
-                    res.status(500).send(sendErrorResponse(500, error.message))
+                    sendErrorResponse(res, 500, error.message)
                 }
                 else {
                     if (response.data.role == "admin") {
                         next()
                     }
                     else {
-                        res.status(401).send(sendErrorResponse(401, "you are not allowed to access admin route"))
+                        sendErrorResponse(res, 401, "you are not allowed to access admin route")
                     }
                 }
             })
         }
         else {
-            res.status(401).send(sendErrorResponse(401, "please send token to acess route"))
+            sendErrorResponse(res, 401, "please send token to acess route")
         }
     }
     catch (error) {
-        res.status(500).send(sendErrorResponse(500, error.message))
+        sendErrorResponse(res, 500, error.message)
     }
 }
