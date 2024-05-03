@@ -2,7 +2,7 @@ import express from 'express'
 import { saveMovieList } from '../controllers/movieLists-controller'
 import { getMovieLists } from '../controllers/listAllMovie-controller'
 import { verifyToken } from '../middlewares/jwtTokenVerification-middleware'
-import { getAllLocations } from '../controllers/location-controller'
+import { getAllLocations } from '../controllers/listingAlllocation-controller'
 import { cityWiseAllReleaseMovie } from '../controllers/cityWiseReleaseMovie-controller'
 
 const router = express.Router()

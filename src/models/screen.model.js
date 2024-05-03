@@ -3,7 +3,6 @@ import mongoose from 'mongoose'
 const movieScreen = new mongoose.Schema({
     screenId: {
         type: Number,
-        unique: true,
         required: true
     },
     screen: {
