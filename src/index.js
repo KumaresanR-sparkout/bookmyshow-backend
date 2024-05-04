@@ -4,7 +4,6 @@ import movieRouter from '../src/routes/movie-route'
 import signupRouter from './routes/signup-route'
 import loginRouter from '../src/routes/login-route'
 import otpRouter from '../src/routes/otp-route'
-import MovieScreen from '../src/models/screen.model'
 
 require('dotenv').config()
 const app = express()

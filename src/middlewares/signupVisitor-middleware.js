@@ -1,4 +1,4 @@
-import { sendErrorResponse } from '../utils/commonResponse-utils'
+import { sendErrorResponse } from '../utils/responseHandler-utils'
 export const signupVisitorMiddleware = async (req, res, next) => {
     try {
         if (Object.keys(req.body).length == 0) {
@@ -10,5 +10,6 @@ export const signupVisitorMiddleware = async (req, res, next) => {
     }
     catch (error) {
         sendErrorResponse(res, 500, error.message)
+        return
     }
 }

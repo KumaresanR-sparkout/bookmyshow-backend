@@ -1,5 +1,5 @@
 import jsonwentoken from 'jsonwebtoken'
-import { sendErrorResponse } from '../utils/commonResponse-utils'
+import { sendErrorResponse } from '../utils/responseHandler-utils'
 require('dotenv').config()
 
 export const verifyToken = (req, res, next) => {
@@ -25,5 +25,6 @@ export const verifyToken = (req, res, next) => {
     }
     catch (error) {
         sendErrorResponse(res, 500, error.message)
+        return
     }
 }

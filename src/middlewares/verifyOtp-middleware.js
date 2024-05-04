@@ -1,5 +1,5 @@
 import OTP from '../models/otp.model'
-import { sendErrorResponse } from '../utils/commonResponse-utils'
+import { sendErrorResponse } from '../utils/responseHandler-utils'
 
 export const verifyOtp = async (req, res, next) => {
     try {
@@ -18,6 +18,7 @@ export const verifyOtp = async (req, res, next) => {
     }
     catch (error) {
         sendErrorResponse(res, 500, error.message)
+        return
     }
 
 }

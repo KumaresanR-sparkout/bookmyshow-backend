@@ -1,5 +1,5 @@
 import UserAccount from '../models/user.model'
-import { sendSuccessResponse, sendErrorResponse } from '../utils/commonResponse-utils'
+import { sendSuccessResponse, sendErrorResponse } from '../utils/responseHandler-utils'
 import jsonwebtoken from 'jsonwebtoken'
 require('dotenv').config()
 
@@ -29,5 +29,6 @@ export const adminLoginAccount = async (req, res) => {
     }
     catch (error) {
         sendErrorResponse(res, 500, "something went wrong !! you are not supposed to login")
+        return
     }
 }

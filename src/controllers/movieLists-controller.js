@@ -1,6 +1,6 @@
 import Movies from '../models/movies.model'
 import MovieScreen from '../models/screen.model'
-import { sendSuccessResponse, sendErrorResponse } from '../utils/commonResponse-utils'
+import { sendSuccessResponse, sendErrorResponse } from '../utils/responseHandler-utils'
 
 export const saveMovieList = async (req, res) => {
 
@@ -24,10 +24,12 @@ export const saveMovieList = async (req, res) => {
         }).save()
 
         sendSuccessResponse(res, 201, "Movies lists created successfully", { movieScreen, movieList })
+        return
 
     }
     catch (error) {
         sendErrorResponse(res, 500, error.message)
+        return
     }
 }
 

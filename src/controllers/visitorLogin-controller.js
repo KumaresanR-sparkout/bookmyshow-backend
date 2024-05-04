@@ -1,5 +1,5 @@
 import UserAccount from '../models/user.model'
-import { sendSuccessResponse, sendErrorResponse } from '../utils/commonResponse-utils'
+import { sendSuccessResponse, sendErrorResponse } from '../utils/responseHandler-utils'
 import jsonwebtoken from 'jsonwebtoken'
 require('dotenv').config()
 
@@ -30,5 +30,6 @@ export const visitorLoginAccount = async (req, res) => {
     }
     catch (error) {
         sendErrorResponse(res, 500, error.message)
+        return
     }
 }
