@@ -1,8 +1,8 @@
 import express from 'express'
 import { signupAccount } from '../controllers/signup-controller'
-import { signupAdminMiddleware } from '../middlewares/signupAdmin-middleware'
-import { signupVisitorMiddleware } from '../middlewares/signupVisitor-middleware'
-import { verifyOtp } from '../middlewares/verifyOtp-middleware'
+import { signupAdminMiddleware } from '../middlewares/signup-admin-middleware'
+import { signupVisitorMiddleware } from '../middlewares/signup-visitor-middleware'
+import { verifyOtp } from '../middlewares/verify-otp-middleware'
 
 const router = express.Router()
 router.use(express.json())

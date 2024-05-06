@@ -1,15 +1,14 @@
 import mongoose from "mongoose";
-import MovieScreen from "./screen.model"
 const movies = new mongoose.Schema({
-    screenId: {
+    screen_id: {
         type: Number,
         required: true
     },
-    movieId: {
+    movie_id: {
         type: Number,
         required: true
     },
-    movieName: {
+    movie_name: {
         type: String,
         required: true
     },
@@ -29,9 +28,9 @@ const movies = new mongoose.Schema({
         type: Date,
         required: true
     },
-    screenRef: {
+    screen_ref: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: MovieScreen
+        ref: "Screens"
     },
 })
 

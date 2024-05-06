@@ -1,14 +1,12 @@
 import Movies from '../models/movies.model'
-import { sendSuccessResponse, sendErrorResponse } from '../utils/responseHandler-utils'
+import { sendSuccessResponse, sendErrorResponse } from '../utils/response-handler-utils'
 
 export const getMovieLists = async (req, res) => {
     try {
-        const movieLists = await Movies.find().populate('screenRef').exec()
+        const movieLists = await Movies.find().populate('screen_ref').exec()
         sendSuccessResponse(res, 200, "listing all movies in cinemas", movieLists)
-        return
     }
     catch (error) {
         sendErrorResponse(res, 500, error.message)
-        return
     }
 }

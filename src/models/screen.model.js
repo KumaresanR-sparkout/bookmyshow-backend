@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
-const movieScreen = new mongoose.Schema({
-    screenId: {
+const screen = new mongoose.Schema({
+    screen_id: {
         type: Number,
         required: true
     },
@@ -25,7 +25,6 @@ const movieScreen = new mongoose.Schema({
         trim: true,
         required: true
     }
-
 })
 
-export default mongoose.model('MovieScreen', movieScreen)
+export default mongoose.model('Screens', screen)

@@ -1,6 +1,6 @@
 import express from 'express'
-import { adminLoginAccount } from '../controllers/adminLogin-controller'
-import { visitorLoginAccount } from '../controllers/visitorLogin-controller'
+import { adminLoginAccount } from '../controllers/admin-login-controller'
+import { visitorLoginAccount } from '../controllers/visitor-login-controller'
 
 const router = express()
 router.use(express.json())

@@ -1,5 +1,5 @@
 import { otpGen } from 'otp-gen-agent'
-import { sendSuccessResponse, sendErrorResponse } from '../utils/responseHandler-utils';
+import { sendSuccessResponse, sendErrorResponse } from '../utils/response-handler-utils';
 import OtpModel from '../models/otp.model'
 export const otpGenerator = async (req, res) => {
     try {
@@ -9,16 +9,13 @@ export const otpGenerator = async (req, res) => {
         if (!existingUser) {
             const newUser = await new OtpModel({ ...req.body, otp }).save()
             sendSuccessResponse(res, 201, "otp sent provided email successfully", newUser)
-            return
         }
         else {
             sendErrorResponse(res, 400, "email has not been registered")
-            return
         }
     }
     catch (error) {
         sendErrorResponse(res, 500, error.message)
-        return
     }
 
 }

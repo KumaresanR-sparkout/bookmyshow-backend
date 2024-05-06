@@ -1,19 +1,16 @@
 import Movies from '../models/movies.model'
-import { sendSuccessResponse, sendErrorResponse } from '../utils/responseHandler-utils'
+import { sendSuccessResponse, sendErrorResponse } from '../utils/response-handler-utils'
 
 export const cityWiseAllReleaseMovie = async (req, res) => {
     try {
-        console.log(req.params.city)
         const cityWiseMovieLists = await Movies.find()
-            .populate({ path: 'screenRef', match: { city: { $eq: req.params.city } }, select: ['screen','city'] })
-            .then((data) => data.filter(data => data.screenRef != null))
+            .populate({ path: 'screen_ref', match: { city: { $eq: req.params.city } }, select: ['screen', 'city'] })
+            .then((data) => data.filter(data => data.screen_ref != null))
 
         sendSuccessResponse(res, 200, "listing all movies in selected city", cityWiseMovieLists)
-        return
     }
     catch (error) {
         sendErrorResponse(res, 500, error.message)
-        return
     }
 }
 

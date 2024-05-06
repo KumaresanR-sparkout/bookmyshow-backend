@@ -1,5 +1,5 @@
 import UserAccount from '../models/user.model'
-import { sendSuccessResponse, sendErrorResponse } from '../utils/responseHandler-utils'
+import { sendSuccessResponse, sendErrorResponse } from '../utils/response-handler-utils'
 import jsonwebtoken from 'jsonwebtoken'
 require('dotenv').config()
 
@@ -21,15 +21,12 @@ export const visitorLoginAccount = async (req, res) => {
             const sendResponse = { existingUser, "token": jwt }
 
             sendSuccessResponse(res, 200, "user loggedIn successfully", sendResponse)
-            return
         }
         else {
             sendErrorResponse(res, 400, "use valied login credentials")
-            return
         }
     }
     catch (error) {
         sendErrorResponse(res, 500, error.message)
-        return
     }
 }

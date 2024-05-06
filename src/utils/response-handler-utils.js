@@ -5,7 +5,7 @@ export const sendSuccessResponse = (res, statusCode, message, data) => {
         "message": message,
         "body": data
     }
-    res.status(statusCode).json(responseData)
+    return res.status(statusCode).json(responseData)
 }
 
 export const sendErrorResponse = (res, statusCode, message) => {
@@ -14,5 +14,5 @@ export const sendErrorResponse = (res, statusCode, message) => {
         "status": false,
         "message": message
     }   
-    res.status(statusCode).json(responseData)
+    return res.status(statusCode).json(responseData)
 }
