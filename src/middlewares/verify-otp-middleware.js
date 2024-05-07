@@ -6,15 +6,15 @@ export const verifyOtp = async (req, res, next) => {
         const otp = req.body.otp
         const otpVerification = await OTP.findOne({ email: req.body.email })
         if (!otpVerification) {
-            sendErrorResponse(res, 401, "no user found to verify otp")
+            return sendErrorResponse(res, 401, "no user found to verify otp")
         }
         if (otpVerification.otp != otp) {
-            sendErrorResponse(res, 401, "otp mismatched")
+            return sendErrorResponse(res, 401, "otp mismatched")
         }
         next()
     }
     catch (error) {
-        sendErrorResponse(res, 500, error.message)
+        return sendErrorResponse(res, 500, error.message)
     }
 
 }

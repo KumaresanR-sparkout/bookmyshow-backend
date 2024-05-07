@@ -1,19 +1,19 @@
-import MovieScreen from '../models/screen.model'
+import Screens from '../models/screen.model'
 import { sendSuccessResponse, sendErrorResponse } from '../utils/response-handler-utils'
 
 
 export const getAllLocations = async (req, res) => {
     try {
-        const locations = await MovieScreen.find()
-        const filteredData = locations.reduce((acc, crv) => {
+        const locations = await Screens.find()
+        const filteredData = locations.reduce((locationsList, location) => {
             if (true) {
-                acc.push(crv.city)
+                locationsList.push(location.city)
             }
-            return acc
+            return locationsList
         }, [])
-        sendSuccessResponse(res, 200, "listing available all location", filteredData)
+        return sendSuccessResponse(res, 200, "listing available all location", filteredData)
     }
     catch (error) {
-        sendErrorResponse(res, 500, error.message)
+        return sendErrorResponse(res, 500, error.message)
     }
 }

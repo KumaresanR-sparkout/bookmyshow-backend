@@ -4,9 +4,9 @@ import { sendSuccessResponse, sendErrorResponse } from '../utils/response-handle
 export const getMovieLists = async (req, res) => {
     try {
         const movieLists = await Movies.find().populate('screen_ref').exec()
-        sendSuccessResponse(res, 200, "listing all movies in cinemas", movieLists)
+        return sendSuccessResponse(res, 200, "listing all movies in cinemas", movieLists)
     }
     catch (error) {
-        sendErrorResponse(res, 500, error.message)
+        return sendErrorResponse(res, 500, error.message)
     }
 }

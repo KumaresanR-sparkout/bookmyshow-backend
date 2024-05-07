@@ -7,10 +7,10 @@ export const cityWiseAllReleaseMovie = async (req, res) => {
             .populate({ path: 'screen_ref', match: { city: { $eq: req.params.city } }, select: ['screen', 'city'] })
             .then((data) => data.filter(data => data.screen_ref != null))
 
-        sendSuccessResponse(res, 200, "listing all movies in selected city", cityWiseMovieLists)
+        return sendSuccessResponse(res, 200, "listing all movies in selected city", cityWiseMovieLists)
     }
     catch (error) {
-        sendErrorResponse(res, 500, error.message)
+        return sendErrorResponse(res, 500, error.message)
     }
 }
 

@@ -1,3 +1,4 @@
+import { Promise } from 'mongoose'
 import Movies from '../models/movies.model'
 import Screens from '../models/screen.model'
 import Theatres from '../models/theatre.model'
@@ -6,32 +7,38 @@ import { sendSuccessResponse, sendErrorResponse } from '../utils/response-handle
 export const saveMovieList = async (req, res) => {
 
     if (Object.keys(req.body).length == 0) {
-        sendErrorResponse(res, 404, "no movies found to create")
+        return sendErrorResponse(res, 404, "no movies found to create")
     }
 
     try {
         const listMovie = req.body
 
-        const screens = await new Screens(
-            listMovie.screens
-        ).save()
+        const screens = new Screens(
+            listMovie.screens,
+        )
 
-        const movies = await new Movies({
+        const movies = new Movies({
             screen_id: listMovie.screens.screen_id,
             ...listMovie.movies,
             screen_ref: screens._id
-        }).save()
+        })
 
-        const theatre = await new Theatres({
+        const theatre = new Theatres({
             screen_ref: screens._id,
             movie_ref: movies._id,
             ...listMovie.theatre
-        }).save()
+        })
+        screens.movie_ref = movies._id
+        screens.theatre_ref = theatre._id
 
-        sendSuccessResponse(res, 201, "Movies lists created successfully", { screens, movies, theatre })
+        await screens.save()
+        await movies.save()
+        await theatre.save()
+
+        return sendSuccessResponse(res, 201, "Movies lists created successfully", { screens, movies, theatre })
     }
     catch (error) {
-        sendErrorResponse(res, 500, error.message)
+        return sendErrorResponse(res, 500, error.message)
     }
 }
 

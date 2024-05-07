@@ -8,13 +8,13 @@ export const signupAccount = async (req, res) => {
         if (!existingUser) {
             const userData = { email: req.body.email, password: req.body.password, role: req.role }
             const signupUser = await new UserAccount(userData).save()
-            sendSuccessResponse(res, 201, "user signedUp successfully", signupUser)
+            return sendSuccessResponse(res, 201, "user signedUp successfully", signupUser)
         }
         else {
-            sendErrorResponse(res, 400, "already email has been registered")
+            return sendErrorResponse(res, 400, "already email has been registered")
         }
     }
     catch (error) {
-        sendErrorResponse(res, 500, "account not created! something went wrong")
+        return sendErrorResponse(res, 500, "account not created! something went wrong")
     }
 }
